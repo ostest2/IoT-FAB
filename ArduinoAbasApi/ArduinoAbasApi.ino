@@ -27,7 +27,6 @@ void prepareScripts(String key) {
   //Priprava scriptu prenosu
   Console.println("Preparing sec. script .." + key + "..\n");
   File script2 = FileSystem.open("/tmp/abasexportstart.sh", FILE_WRITE);
-  script2.print("#!/bin/sh\n");
   script2.print("rm -f /tmp/datard\n");
 
   // There is part of script responsible to transfer scrips to server and move data from server and cleanup
@@ -50,7 +49,7 @@ void prepareScripts(String key) {
   Console.println("Change attrib of an script ....\n");
   Process chmod;
   chmod.begin("chmod");
-  chmod.addParameter("ug+x");
+  chmod.addParameter("+x");
   chmod.addParameter("/tmp/abasexport.sh");
   chmod.addParameter("/tmp/abasexportstart.sh");
   chmod.run();
@@ -60,6 +59,7 @@ void prepareScripts(String key) {
   Process cron;
   cron.runShellCommand("crontab -ru root");
   cron.runShellCommand("echo '0 * * * * /tmp/abasexportstart.sh' | crontab -u root -");
+  cron.runShellCommand("/tmp/abasexportstart.sh");
 }
 
 
@@ -136,8 +136,6 @@ void setup() {
 
   // Prepare scripts and cron + first start scr.
   prepareScripts(key);
-  Process prep_data;
-  prep_data.runShellCommand("/tmp/abasexportstart.sh");
 
 }
 
@@ -156,8 +154,8 @@ void loop() {
     client.stop();
   }
 
-  //Provadi kazdou 1/10 sec
+  //Provadi kazdou 1/20 sec
   checkStatus();
-  delay(100);
+  delay(50);
 }
 
