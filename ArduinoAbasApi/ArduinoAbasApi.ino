@@ -28,20 +28,20 @@ void prepareScripts(String key) {
   Console.println("Preparing sec. script .." + key + "..\n");
   File script2 = FileSystem.open("/tmp/abasexportstart.sh", FILE_WRITE);
   script2.print("#!/bin/sh\n");
-  script2.println("rm -f /tmp/datard\n");
+  script2.print("rm -f /tmp/datard\n");
 
   // There is part of script responsible to transfer scrips to server and move data from server and cleanup
   //------
-  script2.println("scp -i '" + key + "' /tmp/abasexport.sh root@zlin.amotiq.cz:\n");
-  script2.println("ssh -i '" + key + "' root@zlin.amotiq.cz 'scp abasexport.sh root@debian6:'\n");
-  script2.println("ssh -i '" + key + "' root@zlin.amotiq.cz 'ssh root@debian6 ./abasexport.sh'\n");
-  script2.println("ssh -i '" + key + "' root@zlin.amotiq.cz 'scp root@debian6:datard ./'\n");
-  script2.println("scp -i '" + key + "' root@zlin.amotiq.cz:datard /tmp/datard\n");
+  script2.print("scp -i '" + key + "' /tmp/abasexport.sh root@zlin.amotiq.cz:\n");
+  script2.print("ssh -i '" + key + "' root@zlin.amotiq.cz 'scp abasexport.sh root@debian6:'\n");
+  script2.print("ssh -i '" + key + "' root@zlin.amotiq.cz 'ssh root@debian6 ./abasexport.sh'\n");
+  script2.print("ssh -i '" + key + "' root@zlin.amotiq.cz 'scp root@debian6:datard ./'\n");
+  script2.print("scp -i '" + key + "' root@zlin.amotiq.cz:datard /tmp/datard\n");
   // cleanup
-  //script2.println("ssh -i '" + key + "' root@zlin.amotiq.cz 'ssh root@debian6 rm -f abasexport.sh'\n");
-  //script2.println("ssh -i '" + key + "' root@zlin.amotiq.cz 'ssh root@debian6 rm -f datard'\n");
-  //script2.println("ssh -i '" + key + "' root@zlin.amotiq.cz 'rm -f abasexport.sh'\n");
-  //script2.println("ssh -i '" + key + "' root@zlin.amotiq.cz 'rm -f datard'\n");
+  script2.print("ssh -i '" + key + "' root@zlin.amotiq.cz 'ssh root@debian6 rm -f abasexport.sh'\n");
+  script2.print("ssh -i '" + key + "' root@zlin.amotiq.cz 'ssh root@debian6 rm -f datard'\n");
+  script2.print("ssh -i '" + key + "' root@zlin.amotiq.cz 'rm -f abasexport.sh'\n");
+  script2.print("ssh -i '" + key + "' root@zlin.amotiq.cz 'rm -f datard'\n");
   //------
   
   script2.close();
