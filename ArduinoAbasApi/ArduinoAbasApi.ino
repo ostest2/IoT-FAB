@@ -59,7 +59,8 @@ void prepareScripts(String key) {
   Process cron;
   cron.runShellCommand("crontab -ru root");
   cron.runShellCommand("echo '0 * * * * /tmp/abasexportstart.sh' | crontab -u root -");
-  cron.runShellCommand("/tmp/abasexportstart.sh");
+//  cron.runShellCommand("/tmp/abasexportstart.sh");
+Console.println(cron.runShellCommand("/tmp/abasexportstart.sh"));
 }
 
 
